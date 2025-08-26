@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FORM VALIDATION</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Create Account</h2>
+      </div>
+      <form id="form" class="form">
+        <div class="form-control">
+          <label for="username">Username</label>
+          <input type="text" id="username" />
+          <small>Display Error Message</small>
+        </div>
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input type="text" id="email" />
+          <small>Display Error Message</small>
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" id="password" />
+          <button type="button" class="showbtn">show</button>
+          <small>Display Error Message</small>
+        </div>
+        <div class="form-control">
+          <label for="password2">Confirm Password</label>
+          <input type="password" id="password2" />
+          <small>Display Error Message</small>
+        </div>
+        <div class="form-control">
+          <label for="captcha">Are You Human ?</label>
+          <input
+            type="text"
+            id="captcha"
+            placeholder="Type here until picture is clear"
+          />
+          <small>Display Error Message</small>
+        </div>
+        <img src="./avatar-testimonial.jpg" alt="" />
+        <button type="submit" id="btn">Submit</button>
+      </form>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
