@@ -11,13 +11,15 @@ const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+[\]{};:'",./?]).{8,}$/;
 
 form.addEventListener("submit", (e) => {
+  if (!checkInputs()) {
   e.preventDefault();
-
+  }
   // check input fields
-  checkInputs();
+  // checkInputs();
 });
 
 function checkInputs() {
+    let isValid = true;
   const username = usernameInput.value.trim();
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
@@ -27,10 +29,14 @@ function checkInputs() {
   // handle the username
   if (!username) {
     setError(usernameInput, "Username is required");
+    isValid = false;
+
 
     //set error class
   } else if (username.length < 5) {
     setError(usernameInput, "Minimum username length is 5");
+    isValid = false;
+
   } else {
     setSuccess(usernameInput);
   }
@@ -38,8 +44,12 @@ function checkInputs() {
   //   handle email
   if (!email) {
     setError(emailInput, "Email is required");
+    isValid = false;
+
   } else if (!emailRegex.test(email)) {
     setError(emailInput, "Provide a valid email address");
+    isValid = false;
+
   } else {
     setSuccess(emailInput);
   }
@@ -47,10 +57,14 @@ function checkInputs() {
   //handle password
   if (!password) {
     setError(passwordInput, "Password is required");
+    isValid = false;
+
 
     //set error class
   } else if (!passwordRegex.test(password)) {
     setError(passwordInput, "Uppercase, lowercase, number, special character and min of 8");
+  isValid = false;
+
   } else {
     setSuccess(passwordInput);
   }
@@ -58,19 +72,28 @@ function checkInputs() {
   // confirm password
   if (!confirmpassword) {
     setError(password2Input, " Confirm password is required");
+    isValid = false;
+
 
     //set error class
   } else if (confirmpassword !== password) {
     setError(password2Input, "Password do not match");
+    isValid = false;
+
   } else {
     setSuccess(password2Input);
   }
 
   // captcha handling
 
-  if (!captcha) {
-    setError(captchaInput, " Authentication needed");
+   if (!captcha || captcha.length < 6) {
+    setError(captchaInput, "Captcha text too short");
+    isValid = false;
+  } else {
+    setSuccess(captchaInput);
   }
+
+  return isValid; 
 }
 
 // className, cla(ssList.add
@@ -89,7 +112,7 @@ function setSuccess(input) {
 captchaInput.addEventListener("input", (e) => {
   const text = e.target.value;
   const blurValue = 20 - text.length * 2;
-  image.style.filter = `blur(${blurValue}px`;
+  image.style.filter = `blur(${blurValue}px)`;
   if (blurValue <= 0) {
     setSuccess(captchaInput);
   } else {
