@@ -49,7 +49,7 @@ function checkInputs() {
     setError(passwordInput, "Password is required");
 
     //set error class
-  } else if (passwordRegex.test(password)) {
+  } else if (!passwordRegex.test(password)) {
     setError(passwordInput, "Uppercase, lowercase, number, special character and min of 8");
   } else {
     setSuccess(passwordInput);
